@@ -48,7 +48,7 @@
             "dev-master": "2.2-dev"
         },
         "hyperf": {
-            "config": "Hyperf\\Tracer\\ConfigProvider"
+            "config": "Sett\\Tracer\\ConfigProvider"
         }
     }
 }
