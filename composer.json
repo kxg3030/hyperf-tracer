@@ -1,0 +1,54 @@
+{
+    "name": "sett/hyperf-tracer",
+    "description": "A open tracing system implemented for Hyperf or other coroutine framework",
+    "license": "MIT",
+    "keywords": [
+        "php",
+        "hyperf",
+        "open-tracing",
+        "zipkin"
+    ],
+    "homepage": "https://hyperf.io",
+    "support": {
+        "docs": "https://hyperf.wiki",
+        "issues": "https://github.com/hyperf/hyperf/issues",
+        "pull-request": "https://github.com/hyperf/hyperf/pulls",
+        "source": "https://github.com/hyperf/hyperf"
+    },
+    "require": {
+        "php": ">=7.2",
+        "psr/http-message": "^1.0",
+        "hyperf/contract": "~2.2.0",
+        "hyperf/di": "~2.2.0",
+        "hyperf/guzzle": "~2.2.0",
+        "hyperf/utils": "~2.2.0",
+        "jcchavezs/zipkin-opentracing": "^1.0|^2.0",
+        "opentracing/opentracing": "^1.0",
+        "ext-json": "*"
+    },
+    "suggest": {
+        "hyperf/event": "Required to use DbQueryExecutedListener.",
+        "jonahgeorge/jaeger-client-php": "Required (^0.6) to use jaeger tracing."
+    },
+    "autoload": {
+        "psr-4": {
+            "Sett\\Tracer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HyperfTest\\Tracer\\": "tests/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.2-dev"
+        },
+        "hyperf": {
+            "config": "Hyperf\\Tracer\\ConfigProvider"
+        }
+    }
+}
