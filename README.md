@@ -25,6 +25,7 @@ php bin/hyperf.php vendor:publish sett/hyperf-tracer
 - 添加配置
 > 在config/autoload/opentracing.php文件中添加
 ```php
+# 以下配置是组件默认的配置，可以按照自己的需求修改
 return [
     # 链路驱动
     'default' => env('TRACER_DRIVER', 'zipkin'),
@@ -115,7 +116,7 @@ return [
 ```javascript
 return [
     'http' => [
-        \Hyperf\Tracer\Middleware\TraceMiddleware::class,
+        \Sett\Tracer\Middleware\TraceMiddleware::class,
 ],
 ];
 ```
