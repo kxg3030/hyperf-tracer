@@ -32,7 +32,7 @@ return [
     ],
     'tracer'  => [
         'zipkin' => [
-            'driver'  => Hyperf\Tracer\Adapter\ZipkinTracerFactory::class,
+            'driver'  => Sett\Tracer\Adapter\ZipkinTracerFactory::class,
             'app'     => [
                 'name' => env('APP_NAME', 'skeleton'),
                 'ipv4' => '127.0.0.1',
@@ -46,7 +46,7 @@ return [
             'sampler' => BinarySampler::createAsAlwaysSample(),
         ],
         'jaeger' => [
-            'driver'  => Hyperf\Tracer\Adapter\JaegerTracerFactory::class,
+            'driver'  => Sett\Tracer\Adapter\JaegerTracerFactory::class,
             'name'    => env('APP_NAME', 'skeleton'),
             'options' => [
                 'sampler'     => [

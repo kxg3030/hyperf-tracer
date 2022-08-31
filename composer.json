@@ -8,13 +8,6 @@
         "open-tracing",
         "zipkin"
     ],
-    "homepage": "https://hyperf.io",
-    "support": {
-        "docs": "https://hyperf.wiki",
-        "issues": "https://github.com/hyperf/hyperf/issues",
-        "pull-request": "https://github.com/hyperf/hyperf/pulls",
-        "source": "https://github.com/hyperf/hyperf"
-    },
     "require": {
         "php": ">=7.2",
         "psr/http-message": "^1.0",
@@ -33,11 +26,6 @@
     "autoload": {
         "psr-4": {
             "Sett\\Tracer\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "HyperfTest\\Tracer\\": "tests/"
         }
     },
     "config": {
