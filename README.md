@@ -68,32 +68,39 @@ return [
         ],
     ],
     'tags'    => [
+        # 请求外部接口记录
         'http_client' => function (Span $span, array $data) {
             $method = $data['keys']['method'] ?? 'null';
             $uri    = $data['keys']['uri'] ?? 'null';
             $span->setTag("http.url", $uri);
             $span->setTag("http.method", $method);
         },
+        # redis    
         'redis'       => function (Span $span, array $data) {
             $span->setTag("redis.arguments", Json::encode($data['arguments']));
         },
+        # 数据库
         'db'          => function (Span $span, array $data) {
             $span->setTag("db.query", Json::encode($data['arguments'], JSON_UNESCAPED_UNICODE));
         },
+        # 异常记录
         'exception'   => function (Span $span, \Throwable $throwable) {
             $span->setTag("exception.class", get_class($throwable));
             $span->setTag("exception.code", $throwable->getCode());
             $span->setTag("exception.error", $throwable->getMessage());
             $span->setTag("exception.trace", $throwable->getTraceAsString());
         },
+        # 外部请求接口时记录的值
         'request'     => function (Span $span) {
             $request = Context::get(ServerRequestInterface::class);
             $span->setTag("http.get.params", Json::encode($request->getQueryParams(), JSON_UNESCAPED_UNICODE));
             $span->setTag("http.post.params", Json::encode($request->getParsedBody(), JSON_UNESCAPED_UNICODE));
         },
+        # 记录协程ID
         'coroutine'   => function (Span $span, array $data) {
             $span->setTag("coroutine.id", Coroutine::id());
         },
+        # 外部请求接口时记录返回值
         'response'    => function (Span $span) {
             /**@var $response ResponseInterface */
             $response = Context::get(ResponseInterface::class);
