@@ -49,14 +49,15 @@ return [
             'driver'  => Sett\Tracer\Adapter\JaegerTracerFactory::class,
             'name'    => env('APP_NAME', 'skeleton'),
             'options' => [
-                'sampler'     => [
+                'sampler'           => [
                     'type'  => SAMPLER_TYPE_CONST,
                     'param' => true,
                 ],
-                'local_agent' => [
+                'local_agent'       => [
                     'reporting_host' => env('JAEGER_REPORTING_HOST', 'localhost'),
                     'reporting_port' => env('JAEGER_REPORTING_PORT', 5775),
                 ],
+                'max_buffer_length' => "1024"
             ],
         ],
     ],
