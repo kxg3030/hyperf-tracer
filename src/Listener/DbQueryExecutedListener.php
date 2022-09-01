@@ -74,6 +74,7 @@ class DbQueryExecutedListener implements ListenerInterface
         $span    = $this->startSpan("db.query", [
             'start_time' => (int)(($endTime - $event->time / 1000) * 1000 * 1000),
         ]);
+        $this->record("db", [], $span);
         $span->setTag("db.statement", $sql);
         $span->setTag("db.query_time", $event->time . ' ms');
         $span->finish((int)($endTime * 1000 * 1000));

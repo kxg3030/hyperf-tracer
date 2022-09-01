@@ -72,7 +72,9 @@ return [
             $span->setTag("redis.arguments", Json::encode($data['arguments']));
         },
         'db'          => function (Span $span, array $data) {
-            $span->setTag("db.query", Json::encode($data['arguments'], JSON_UNESCAPED_UNICODE));
+            /**@var $request ServerRequestInterface */
+            $request = Context::get(ServerRequestInterface::class);
+            $span->setTag("http.url", (string)$request->getUri());
         },
         'exception'   => function (Span $span, \Throwable $throwable) {
             $span->setTag("exception.class", get_class($throwable));
