@@ -69,14 +69,23 @@ return [
             $span->setTag("http.method", $method);
         },
         'redis'       => function (Span $span, array $data) {
+            /**@var $request ServerRequestInterface */
+            $request = Context::get(ServerRequestInterface::class);
+            $span->setTag("http.url", (string)$request->getUri());
+            $span->setTag("http.headers", Json::encode($request->getHeaders(),JSON_UNESCAPED_UNICODE));
             $span->setTag("redis.arguments", Json::encode($data['arguments']));
         },
         'db'          => function (Span $span, array $data) {
             /**@var $request ServerRequestInterface */
             $request = Context::get(ServerRequestInterface::class);
             $span->setTag("http.url", (string)$request->getUri());
+            $span->setTag("http.headers", Json::encode($request->getHeaders(),JSON_UNESCAPED_UNICODE));
         },
         'exception'   => function (Span $span, \Throwable $throwable) {
+            /**@var $request ServerRequestInterface */
+            $request = Context::get(ServerRequestInterface::class);
+            $span->setTag("http.url", (string)$request->getUri());
+            $span->setTag("http.headers", Json::encode($request->getHeaders(),JSON_UNESCAPED_UNICODE));
             $span->setTag("exception.class", get_class($throwable));
             $span->setTag("exception.code", $throwable->getCode());
             $span->setTag("exception.error", $throwable->getMessage());
@@ -84,6 +93,8 @@ return [
         },
         'request'     => function (Span $span) {
             $request = Context::get(ServerRequestInterface::class);
+            $span->setTag("http.url", (string)$request->getUri());
+            $span->setTag("http.headers", Json::encode($request->getHeaders(),JSON_UNESCAPED_UNICODE));
             $span->setTag("http.get.params", Json::encode($request->getQueryParams(), JSON_UNESCAPED_UNICODE));
             $span->setTag("http.post.params", Json::encode($request->getParsedBody(), JSON_UNESCAPED_UNICODE));
         },
