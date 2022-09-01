@@ -57,7 +57,6 @@ return [
                     'reporting_host' => env('JAEGER_REPORTING_HOST', 'localhost'),
                     'reporting_port' => env('JAEGER_REPORTING_PORT', 5775),
                 ],
-                'max_buffer_length' => "1024"
             ],
         ],
     ],
