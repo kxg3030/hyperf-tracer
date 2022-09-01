@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Sett\Tracer\Middleware;
 
 use Hyperf\HttpMessage\Exception\HttpException;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Sett\Tracer\SpanStarter;
 use Sett\Tracer\SpanTagManager;
 use Sett\Tracer\SwitchManager;
@@ -89,6 +91,8 @@ class TraceMiddleware implements MiddlewareInterface
     /**
      * @param ServerRequestInterface $request
      * @return Span
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
     protected function buildSpan(ServerRequestInterface $request): Span {
         $uri  = $request->getUri();

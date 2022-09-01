@@ -17,6 +17,7 @@ use Hyperf\Rpc;
 use Hyperf\Utils\ApplicationContext;
 use OpenTracing\Reference;
 use OpenTracing\Span;
+use OpenTracing\SpanContext;
 use OpenTracing\Tracer;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -64,7 +65,7 @@ trait SpanStarter
                 }
             }
             $parentContext = $this->tracer->extract(TEXT_MAP, $carrier);
-            if ($parentContext) {
+            if ($parentContext instanceof SpanContext) {
                 $option["references"] = [
                     new Reference(Reference::CHILD_OF, $parentContext),
                 ];
